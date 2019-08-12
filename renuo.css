@@ -1,0 +1,22 @@
+/* @theme renuo */
+@import 'default';
+
+h1, h2 {
+  color: #26d79d;
+}
+
+img[alt~="portrait"] {
+  position: absolute;
+  right: 1cm;
+  top: 1cm;
+  height: 5cm;
+}
+
+section.renuo {
+  background-color: #26d79d;
+  background-image: url('../images/horizontal-lines.svg');
+}
+
+section.renuo h1, section.renuo h2 {
+  color: #000;  
+}
