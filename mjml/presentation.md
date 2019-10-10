@@ -96,13 +96,13 @@ https://mjml.io/try-it-live/Bk--7Fjwr
 
 # Templates
 
-Some tempaltes are already available:
+Some templates are already available:
 
 https://mjml.io/templates
 
 ---
 
-# how do I use it Rails?
+# How do I use it Rails?
 
 `gem 'mjml-rails'`
 
