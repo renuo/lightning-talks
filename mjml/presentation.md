@@ -7,7 +7,7 @@ theme: renuo
 # mjml
 ## A template language for responsive emails
 
-##### 2019-10-? by Alessandro Rodi
+##### 2019-10-18 by Alessandro Rodi
 
 ---
 
