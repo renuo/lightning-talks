@@ -21,7 +21,7 @@ Some data:
 - The courses are about 10’000
 - The matters are about 4’000
 - Custom searches will grow in number
-- About 648’984 searches are optimised for search engines and are fast (400ms)
+- About 648’984 searches are optimised for search engines and are fast (< 400ms)
 - All the others are coming from the users and are 600ms < slow < 5 seconds
 - Each course has N matters, sorted by importance
 
@@ -35,6 +35,12 @@ Search results should place on the top the most relevant courses. Keeping in con
 - Ranking of the school
 - Quality of the course
 - Distance from the place where you search a course
+
+---
+
+# Ideas - SOLR / elasticserarch / Algolia
+
+Do we really want to deal with a separate app for the indexing? This is extremely expensive in terms of maintainance and/or pricing.
 
 
 ---
@@ -126,7 +132,15 @@ Let's go with the query because we can do it in about 30 minutes and check if th
 
 > "You might also want to manipulate these search results. If tomorrow you want to place a course before another one, no matter what, how would you do it with the query?"
 
-> _"With the ranking table, you have more degrees of freedom: boost a school, boost a course, or boost a course for a specific search"_
+> _"With the ranking table, you have more degrees of freedom: boost a school, boost a course, or 
+boost a course for a specific search"_
+
+---
+
+# Let's step back
+
+> "Do you really need to give a boost for the distance?"
+
 ---
 
 # Let's step back
@@ -137,7 +151,8 @@ Let's go with the query because we can do it in about 30 minutes and check if th
 
 # The implementation
 
-This solution has been implemented by Duccio in about three to four working days and is already in production. No data can be extracted at the moment, but the pages are much faster and the results in each page are much better than before.
+This solution has been implemented by Duccio in about three to four working days and is already in production. 
+No data can be presented at the moment, but the pages are much faster and the results in each page are much better than before.
 
 ---
 
@@ -160,17 +175,43 @@ end
 
 ---
 
-# Take Home Message
+# Take Home Message(s)
 or: why the hell did you tell us about this story?
 
-- Look always at the business side
-- Understand where your customer earns the money
-- Apply the Pareto principle: 80% of earnings might come from 20% of the features.
-- Double-check your premises and requirements
-- Once you find a solution, verify if the initial requirements are fulfilled.
-- Again: can you give 80% of the value, with the 20% of the work? 
-- Trying the SQL was good. Why? Because it was very cheap to try! And it forced us to rethink and look again at the requirements. So...
-- Never be afraid of trying and failing if is cheap :smile:. At least you can sleep at night.
+---
+
+## Look always at the business side
+
+---
+
+## Understand where your customer earns the money
+
+## Apply the Pareto principle: 80% of earnings might come from 20% of the features.
+
+---
+
+## Double-check your premises and requirements. Challenge them. Multiple times.
+
+## Once you find a solution, verify if the initial requirements are fulfilled.
+
+---
+
+## Again: can you give 80% of the value, with the 20% of the work? 
+
+---
+
+## Don't go straight to the "usual suspects" (Solr, Elastic Search & co.)
+
+---
+
+## Trying the SQL was good. 
+
+Why? Because it was very cheap to try! And it forced us to rethink and look again at the requirements. So...
+
+---
+
+## Never be afraid of trying and failing
+if is cheap :smile:. 
 
 ---
 
