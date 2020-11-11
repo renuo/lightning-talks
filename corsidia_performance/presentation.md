@@ -7,7 +7,7 @@ theme: renuo
 # How to ~~not~~ search
 ## Performance optimization on corsidia.com 
 
-##### 2020-10-07 by Alessandro Rodi
+##### 2020-11-11 by Alessandro Rodi
 
 ---
 
@@ -211,9 +211,9 @@ We sat again and started from scratch. Here is the most important question that 
 
 # The implementation
 
-This solution has been implemented by Duccio in about three to four working days and has been put in production in February. 
+This solution has been implemented in about three to four working days and has been put in production in February. 
 
-Pages are much faster and the results in each page are much better than before. :muscle:
+Pages were much faster (< 200ms) and the results in each page were much better than before. (# of clicks on a course from a search result) :muscle:
 
 ---
 
@@ -224,11 +224,11 @@ class Ranker
   self.call(search)    
     courses = find_courses(search)
     courses.each do |course|
-     calculated_rank = 0
-     calculated_rank += course.school_ranking # add the school ranking
-     calculated_rank += course.whatever # add more points
-     calculated_rank += (10 - course.matters.find_index(search.matter)) * 100 # add point for matters, depending on the order
-     search.ranked_coursed.create(course, rank: calculated_rank)
+     rank = 0
+     rank += course.school_ranking # add the school ranking
+     rank += course.whatever # add more points
+     rank += (10 - course.matters.find_index(search.matter)) * 100 # add point for matters, depending on the order
+     search.ranked_coursed.create(course, rank: rank)
     end
   end
 end
@@ -238,7 +238,7 @@ end
 
 # Take Home Message(s)
 
-> why the hell did you tell us about this story?
+> why did you tell us about this story?
 
 ---
 
