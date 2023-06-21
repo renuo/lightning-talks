@@ -14,9 +14,14 @@ img[alt~="portrait"] {
 
 section.renuo {
   background-color: #27d79d;
+  color: #fff;
   background-image: url('../images/horizontal-lines.svg');
 }
 
-section.renuo h1, section.renuo h2 {
-  color: #000;  
+section.renuo h1, section.renuo h2, section.renuo a {
+  color: #fff;  
+}
+
+section.renuo a {
+  text-decoration: underscore;
 }

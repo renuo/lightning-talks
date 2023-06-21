@@ -1,0 +1,174 @@
+<html>
+<head>
+    <title>Defensive CSS</title>
+    <link rel="stylesheet" href="https://unpkg.com/simpledotcss@2.0.0/simple-v1.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <style>
+        .mx-2 {
+            margin-left: 2rem;
+            margin-right: 2rem;
+        }
+
+        .my-1 {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .green {
+            color: green;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        .yellow {
+            color: yellow;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .resizable {
+            resize: horizontal;
+            overflow: hidden;
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        .our-image {
+            width: 80%;
+            max-height: 300px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .username {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        img {
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+<article>
+    <h2>Flexbox Wrapping</h2>
+    <p>When there is not enough space, child items won't wrap into a new line by default.</p>
+    <pre>
+<code>
+  .options-list {
+    display: flex;
+  }
+</code>
+</pre>
+    <div class="resizable">
+        <div class="options-list">
+            <i class="mx-2 fab fa-2x fa-github green"></i>
+            <i class="mx-2 fab fa-2x fa-twitter red"></i>
+            <i class="mx-2 fab fa-2x fa-facebook blue"></i>
+            <i class="mx-2 fab fa-2x fa-instagram yellow"></i>
+        </div>
+    </div>
+</article>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre>
+<code>
+.options-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+</code>
+</pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<article>
+    <h2>Long content</h2>
+    <p>When there is user-generated content, we need to be careful and defend the layout in case something is too
+        long</p>
+    <div class="resizable">
+        <div class="users-list">
+            <div class="flex my-1">
+                <i class="mx-2 far fa-2x fa-user"></i>
+                <div class="username">Alessandro Rodi</div>
+            </div>
+            <div class="flex my-1">
+                <i class="mx-2 far fa-2x fa-user"></i>
+                <div class="username">Josua Schmid</div>
+            </div>
+            <div class="flex my-1">
+                <i class="mx-2 far fa-2x fa-user"></i>
+                <div class="username">A new Renuo employee with a name that is too long</div>
+            </div>
+            <div class="flex my-1">
+                <i class="mx-2 far fa-2x fa-user"></i>
+                <div class="username">Simon Huber</div>
+            </div>
+        </div>
+    </div>
+</article>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre>
+<code>
+  .username {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</code>
+</pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<article>
+    <h2>Image distorsion</h2>
+    <p>When we don't have control over an image's aspect ratio on a web page, it's better to think ahead and provide a
+        solution when a user uploads an image that isn't aligned with the aspect ratio.</p>
+
+    <div class="resizable">
+        <img src="https://picsum.photos/id/1062/800/600" alt="" class="our-image">
+    </div>
+</article>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre>
+<code>
+  img {
+    object-fit: cover;
+  }
+</code>
+</pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+</body>
+</html>
