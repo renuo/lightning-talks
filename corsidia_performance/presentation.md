@@ -94,6 +94,7 @@ When a search is new, we fallback to the previous method. Slow, but only until i
 # New Idea! :bulb:
 
 ---
+
 # DB view and postgres full text search
 
 ```ruby

@@ -1,0 +1,3 @@
+class Example
+  def do_stuff: (String params) -> String
+end
