@@ -7,7 +7,7 @@ footer: 'Validation Errors'
 
 
 
-# Validation Errors
+# Pragmatic Rails - Validation Errors
 ## How to track them in your Ruby On Rails
 
 
