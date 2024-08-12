@@ -25,3 +25,7 @@ section.renuo h1, section.renuo h2, section.renuo a {
 section.renuo a {
   text-decoration: underscore;
 }
+
+footer {
+  color: #fff;
+}
