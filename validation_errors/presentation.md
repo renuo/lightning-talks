@@ -18,13 +18,14 @@ Renuo AG
 
 # A form
 
-Image of a simple form with first name, last name, email, street and street number, city, zip code.
+# ![h:500](images/form.png)
 
 ---
 
+
 # Form submission
 
-We submit the form and we get back from the server the validation errors.
+# ![h:500](images/server_error.png)
 
 ---
 
@@ -43,17 +44,25 @@ end
 
 ---
 
+
+# Form submission
+
+# ![h:500](images/server_error.png)
+
+---
 # Client-side validations
 
 I like immediate feedback so I implement client-side validations.
 
+# ![h:500](images/client_error.png)
+
 ---
 
-# Am I missing something?
+# Client-side validations
 
 Client side validations and server side validations might mismatch.
-This is all good, but we might want to improve the situation.
-I want to know what I am missing. I want to know why my users get stuck.
+
+# ![h:500](images/more_client_error.png)
 
 ---
 
@@ -183,7 +192,6 @@ Made with [Blazer](https://github.com/ankane/blazer)
 ---
 
 # validation_errors gem
-*Because shit happens*
 
 <br><br>
 

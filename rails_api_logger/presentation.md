@@ -110,6 +110,7 @@ end
 
 # ![](images/outbound_statistic.png)
 
+---
 
 # Inbound Requests Logger
 
