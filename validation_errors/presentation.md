@@ -201,10 +201,6 @@ Extracted from real production apps.
 
 ---
 
-# ![h:500](images/cars.png)
-
----
-
 # validation_errors gem
 
 ```ruby
