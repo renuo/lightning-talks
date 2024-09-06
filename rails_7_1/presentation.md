@@ -6,13 +6,13 @@ theme: renuo
 
 # Some fancy Rails 7.1 features
 
-##### 2019-07-30 by Simon I.
+##### 2024-09-06 by Simon I.
 
 --- 
 
 # Part 1: `ActiveRecord::Base::Normalization`
 
-> Unique normalization rules for model attributes
+> Normalization rules for model attributes
 
 ---
 
@@ -48,11 +48,13 @@ end
 
 - `=` (except for nil values)
 - `User.normalize_value_for(:name, " JOHN DOE\n")`
-- finders
+- **finders**
 
 ---
 
 ```ruby
+User.create(name: "\tJOHN DOE ")
+
 user = User.find_by(name: "\tJOHN DOE ")
 user.name # => "John Doe"
 user.name_before_type_cast # => "John Doe"
@@ -70,6 +72,7 @@ User.where(["name = ?", "\tJOHN DOE "]).count # => 0
 ---
 
 # Part 2: Strict locals in templates
+> Define locals a template can accept
 
 ---
 
@@ -115,10 +118,44 @@ app/views/homepage/index.html.erb:2
 
 ---
 
+# How does this ✨ work?
+
+- Arguments are compiled as the method signature of the template
+- Might unlock the ability to pre-compile templates (open discussion)
+
+```ruby
+# actionview/lib/action_view/template.rb
+EXPLICIT_LOCALS_REGEX = /\#\s+locals:\s+\((.*)\)/
+
+def explicit_locals!
+  self.source.sub!(EXPLICIT_LOCALS_REGEX, "")
+  @explicit_locals = $1
+
+  return if @explicit_locals.nil? # Magic comment not found
+
+  @explicit_locals = "**nil" if @explicit_locals.blank?
+end
+
+```
+
+---
+
+# No multiline support yet :/ 
+
+```ruby
+EXPLICIT_LOCALS_REGEX = /\#\s+locals:\s+\((.*)\)/
+```
+
+---
+
 <!-- _class: renuo -->
 
 # ![drop-shadow portrait](../images/simon-i.jpg)
 
 # Thanks
 
-### https://github.com/renuo/lighning-talks
+https://github.com/renuo/lightning-talks
+
+### Sources
+- https://github.com/rails/rails/pull/45602
+- https://api.rubyonrails.org/classes/ActiveRecord/Normalization/ClassMethods.html
