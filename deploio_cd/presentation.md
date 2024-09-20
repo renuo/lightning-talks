@@ -86,6 +86,8 @@ nctl auth login --api-token=$DEPLOIO_API_TOKEN --organization=$DEPLOIO_ORG
 
 ---
 
+# Step 3: Update revision
+
 _develop-deploy.yml_
 ```yaml
 ...
