@@ -1,14 +1,13 @@
 ---
 marp: true
 theme: renuo
-footer: 'Validation Errors'
+footer: 'Rails World 2024'
 ---
 <!-- _class: renuo -->
 
 
-
-# Pragmatic Rails - Validation Errors
-## How to track them in your Ruby On Rails
+# Rails World 2024
+## What has happened
 
 
 Alessandro Rodi
@@ -16,246 +15,84 @@ Renuo AG
 
 ---
 
-# A form
+# Rails Foundation
 
-# ![h:500](images/form.png)
-
----
-
-
-# Form submission
-
-# ![h:500](images/server_error.png)
+- What has been done in the last year.
+- Pre-game at Shopify
+- Speakers dinner
 
 ---
 
-# Form submission
+# Keynote
 
-```ruby
-def create
-    @user = User.new(user_params)
-    if @user.save
-        redirect_to @user
-    else        
-        render :new
-    end
-end
-```
+- #nopaas: all tools to go to production without a paas
+- database (possibly sqlite) as solo-dependency
 
 ---
 
+# Solid queue
 
-# Form submission
-
-# ![h:500](images/server_error.png)
-
----
-# Client-side validations
-
-I like immediate feedback so I implement client-side validations.
-
-# ![h:500](images/client_error.png)
+- How they built solid queue and all the features that it offers
 
 ---
 
-# Client-side validations
+# Kamal Proxy
 
-Client side validations and server side validations might mismatch.
-
-# ![h:500](images/more_client_error.png)
+- Why 
 
 ---
 
-# How to track?
+# The empowered programmer
 
-## Logs
-
-Good idea! (Best one) 
-But we need to parse the logs and extract stats from them, and we might not have such a tool (yet).
-
----
-
-# How to track?
-
-## Sentry (or any error tracker)
-
-Bad idea. Is not an error, right?
+- Followed step-by-step the build of a new rails app
+- 
+- Say no to features too early
 
 ---
 
-# Our own database
+# Frontiers of development productivity
 
-We can keep track of the validation errors in the database.
+- rails-new
 
-
-```ruby
-def create
-    @user = User.new(user_params)
-    if @user.save
-        redirect_to @user
-    else
-        track_errors(@user)
-        render :new
-    end
-end
-```
 
 ---
 
-# Track validation errors
+# The myth of modular monolith
 
-```ruby
-def track_errors(model)
-  ValidationError.create!(invalid_model: model, details: model.errors.details)
-end
-```
-
-```ruby
- # details is a jsonb postgres column
- {"base" => [{"error" => "invalid"}],
-  "title" => [{"error" => "blank"}, {"error" => "invalid"}]}
-```
-
-We keep the structure exactly as the `ActiveRecord::Errors` one.
+- How splitting the monolith in smaller packages did not help at Shopify
 
 ---
 
-# What now?
+# SQLite on Rails
 
-We want to know. We need statistics.
-
----
-
-# Extract stats
-
-We first generate a view to convert this `ValidationError`:
-
-
-| id | invalid_model_name | invalid_model_id | details                                                                                               |
-|----|--------------------|------------------|-------------------------------------------------------------------------------------------------------|
-| 1  | Book               | 1                | `{ "base" => [{ "error" => "invalid" }], "title" => [{ "error" => "blank" }, {"error" => "invalid"}] }` |
+- Aim for a much simpler initial setup for a Rails App thanks to SQLite. 
+- Backup sqlite using litestream
 
 ---
 
-# Extract stats
+# Intercom outage
 
-into this `FlatValidationError`:
-
-| invalid_model_name | invalid_model_id | error_column | error_type |
-|--------------------|------------------|--------------|------------|
-| Book               | 1                | base         |  invalid   |
-| Book               | 1                | title        |  blank     |
-| Book               | 1                | title        |  invalid   |
+- Check if you are using integers as primary keys or foreign keys
+- Improve error messages on exceptions
+- Improve rulebook to know what to do if the same situation happens
 
 ---
 
-# Count the number of errors per day
+# Accessibility in Web apps
 
-```sql
-select count(*), date(created_at) 
-from validation_errors 
-group by date(created_at) 
-order by date(created_at) desc;
-```
-
-<br><br>
-
-```ruby
-ValidationError.group_by_day(:created_at).count
-```
+- Some simple examples on how to improve accessibility
 
 ---
 
-# Count the number of errors per model and attribute
+# Testing Integrations via API calls
 
-```sql
-select invalid_model_name, error_column, count(*)
-from flat_validation_errors
-group by 1, 2
-```
-
-<br><br>
-
-
-```ruby
-FlatValidationError.group(:invalid_model_name, :error_column).count
-```
+- Different techniques: stubs, mocks, webmock, vcr
 
 ---
 
-# Statistics
+# Closing keynote
 
-# ![](images/dashboard.png)
-
-Made with [Blazer](https://github.com/ankane/blazer)
-
----
-
-# validation_errors gem
-
-<br><br>
-
-⭐️ 48 - Github
-
-Extracted from real production apps.
-
----
-
-# validation_errors gem
-
-```ruby
-ValidationErrors.track(your_invalid_model)
-```
-
-<br><br>
-
-```ruby
-def create
-    @user = User.new(user_params)
-    if @user.save
-        redirect_to @user
-    else
-        ValidationError.track(@user)
-        render :new
-    end
-end
-```
-
----
-
-# validation_errors gem
-
-```ruby
-class User < ApplicationRecord
-    track_validation_errors
-end
-```
-
-<br><br>
-
-```ruby
-class ApplicationRecord < ActiveRecord::Base
-    self.abstract_class = true
-    track_validation_errors
-end
-```
-
----
-
-# How do we use it?
-
-### API
-What are the most frequent validation errors? Improve the documentation?
-
-### Web UI
-Improvements to the UI
-
-### Data import
-Are there any mismatch between systems?
-
-### Monitoring
-
-Queries and alerts via Blazer / Monthly review.
+- Improving performance of the Rails Router setup by reducing memory allocations
 
 ---
 
@@ -263,7 +100,5 @@ Queries and alerts via Blazer / Monthly review.
 
 # ![drop-shadow portrait](../images/alessandro.jpg)
 
-
-### https://github.com/coorasse/validation_errors
 
 # Thank you
