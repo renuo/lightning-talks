@@ -12,6 +12,11 @@ img[alt~="portrait"] {
   height: 5cm;
 }
 
+.center {
+  display: block;
+  margin: 0 auto;
+}
+
 section.renuo {
   background-color: #27d79d;
   color: #fff;
